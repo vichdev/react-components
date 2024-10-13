@@ -1,8 +1,10 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "files": [
-    "lib/**",
+    "components/**",
+    "utils/**",
+    "hooks/**",
     "README.md"
   ],
   "engines": {
@@ -14,8 +16,11 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
-    "build": "npm run clean && tsc && babel src --extensions \".ts,.tsx\" --out-dir lib --ignore \"**/*.d.ts\"",
-    "clean": "rimraf ./lib",
+    "build-components": "babel src --extensions \".ts,.tsx\" --out-dir lib --ignore \"**/*.d.ts\" --copy-files && cp -r lib/components ./components",
+    "build-utils": "babel src --extensions \".ts,.tsx\" --out-dir lib --ignore \"**/*.d.ts\" --copy-files && cp -r lib/utils ./utils",
+    "build-hooks": "babel src --extensions \".ts,.tsx\" --out-dir lib --ignore \"**/*.d.ts\" --copy-files && cp -r lib/hooks ./hooks",
+    "build": "npm run clean && tsc && npm run build-components && npm run build-hooks && npm run build-utils",
+    "clean": "rimraf ./lib && rimraf ./components && rimraf ./hooks && rimraf ./utils",
     "major": "npm version major && npm publish",
     "minor": "npm version minor && npm publish",
     "patch": "npm version patch && npm publish"
@@ -34,7 +39,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@vichdev/react-utils",
+  "name": "@vichdev/react-components",
   "author": "Victor Hugo",
   "devDependencies": {
     "@babel/cli": "^7.24.7",
@@ -48,21 +53,27 @@
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "babel-jest": "^29.7.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "husky": "^9.0.11",
     "jest": "^29.7.0",
-    "postcss": "^8.4.38",
+    "postcss": "^8.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rimraf": "^5.0.7",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "^3.4.17",
     "ts-jest": "^29.1.5",
     "typescript": "^5.5.2"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.473.0",
     "rollup-plugin-postcss": "^4.0.2",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
     "ts-node": "^10.9.2"
   },
   "directories": {
@@ -70,10 +81,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vichdev/react-utils.git"
+    "url": "git+https://github.com/vichdev/react-components.git"
   },
   "bugs": {
-    "url": "https://github.com/vichdev/react-utils/issues"
+    "url": "https://github.com/vichdev/react-components/issues"
   },
-  "homepage": "https://github.com/vichdev/react-utils#readme"
+  "homepage": "https://github.com/vichdev/react-components#readme"
 }
